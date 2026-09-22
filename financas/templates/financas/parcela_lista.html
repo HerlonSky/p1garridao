@@ -1,0 +1,46 @@
+{% extends 'financas/base.html' %}
+{% block title %}Parcelas{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Parcelas</h1>
+
+<table class="table table-striped bg-white">
+    <thead>
+        <tr>
+            <th>Vencimento</th>
+            <th>Lançamento</th>
+            <th>Categoria</th>
+            <th>Parcela</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in parcelas %}
+        <tr>
+            <td>{{ p.data_vencimento|date:"d/m/Y" }}</td>
+            <td>{{ p.lancamento.descricao }}</td>
+            <td>{{ p.lancamento.categoria.nome }}</td>
+            <td>{{ p.numero }}/{{ p.lancamento.numero_parcelas }}</td>
+            <td>R$ {{ p.valor }}</td>
+            <td>
+                <span class="badge {% if p.paga %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                    {% if p.paga %}Paga{% else %}Em aberto{% endif %}
+                </span>
+            </td>
+            <td>
+                <form method="post" action="{% url 'parcela_marcar_paga' p.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">
+                        {% if p.paga %}Desmarcar{% else %}Marcar como paga{% endif %}
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" class="text-muted text-center">Nenhuma parcela cadastrada ainda.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

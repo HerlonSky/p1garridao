@@ -1,0 +1,82 @@
+{% extends 'financas/base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Dashboard</h1>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Contas</div>
+            <ul class="list-group list-group-flush">
+                {% for conta in contas %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>{{ conta.nome }} <small class="text-muted">({{ conta.get_tipo_display }})</small></span>
+                        <strong>R$ {{ conta.saldo_atual }}</strong>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">Nenhuma conta cadastrada. Cadastre pelo Admin.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Orçamentos de {{ mes_atual }}/{{ ano_atual }}</div>
+            <ul class="list-group list-group-flush">
+                {% for orc in orcamentos_do_mes %}
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>{{ orc.categoria.nome }}</span>
+                            <span>R$ {{ orc.valor_gasto }} / R$ {{ orc.valor_limite }}</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar {% if orc.estourado %}bg-danger{% else %}bg-success{% endif %}"
+                                 style="width: {{ orc.percentual_usado }}%"></div>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">Nenhum orçamento definido para este mês.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Últimos lançamentos</div>
+            <ul class="list-group list-group-flush">
+                {% for l in ultimos_lancamentos %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>{{ l.data|date:"d/m/Y" }} - {{ l.descricao }}</span>
+                        <span class="{% if l.tipo == 'despesa' %}text-danger{% else %}text-success{% endif %}">
+                            R$ {{ l.valor }}
+                        </span>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">Nenhum lançamento ainda.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Parcelas em aberto</div>
+            <ul class="list-group list-group-flush">
+                {% for p in parcelas_em_aberto %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>{{ p.data_vencimento|date:"d/m/Y" }} - {{ p.lancamento.descricao }} ({{ p.numero }}/{{ p.lancamento.numero_parcelas }})</span>
+                        <strong>R$ {{ p.valor }}</strong>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">Nenhuma parcela em aberto.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
