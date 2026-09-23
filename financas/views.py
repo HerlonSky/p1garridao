@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import LancamentoForm, OrcamentoForm
-from .models import Conta, Lancamento, Orcamento, Parcela
+from .models import Categoria, Conta, Lancamento, Orcamento, Parcela
 
 
 def dashboard(request):
@@ -42,7 +42,22 @@ def dashboard(request):
 
 def lancamento_lista(request):
     lancamentos = Lancamento.objects.select_related('conta', 'categoria').prefetch_related('parcelas')
-    return render(request, 'financas/lancamento_lista.html', {'lancamentos': lancamentos})
+
+    # Feature 1: busca por descrição + filtro por categoria (podem ser usados juntos ou separados)
+    q = request.GET.get('q', '').strip()
+    categoria_id = request.GET.get('categoria', '')
+
+    if q:
+        lancamentos = lancamentos.filter(descricao__icontains=q)
+    if categoria_id.isdigit():
+        lancamentos = lancamentos.filter(categoria_id=categoria_id)
+
+    return render(request, 'financas/lancamento_lista.html', {
+        'lancamentos': lancamentos,
+        'categorias': Categoria.objects.all(),
+        'categoria_id': categoria_id,
+        'filtrando': bool(q or categoria_id),
+    })
 
 
 def lancamento_criar(request):
