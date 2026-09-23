@@ -1,4 +1,5 @@
 {% extends 'financas/base.html' %}
+{% load l10n %}
 {% block title %}Orçamentos{% endblock %}
 
 {% block content %}
@@ -7,7 +8,8 @@
     <a href="{% url 'orcamento_criar' %}" class="btn btn-primary">+ Novo orçamento</a>
 </div>
 
-<table class="table table-striped bg-white">
+<div class="table-wrap">
+<table class="table table-striped mb-0">
     <thead>
         <tr>
             <th>Categoria</th>
@@ -27,7 +29,7 @@
             <td style="min-width: 160px;">
                 <div class="progress" style="height: 8px;">
                     <div class="progress-bar {% if orc.estourado %}bg-danger{% else %}bg-success{% endif %}"
-                         style="width: {{ orc.percentual_usado }}%"></div>
+                         style="width: min({{ orc.percentual_usado|unlocalize }}%, 100%)"></div>
                 </div>
                 <small class="{% if orc.estourado %}text-danger{% else %}text-muted{% endif %}">
                     {{ orc.percentual_usado }}%{% if orc.estourado %} - estourado!{% endif %}
@@ -39,4 +41,5 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 {% endblock %}

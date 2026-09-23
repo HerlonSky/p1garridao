@@ -1,4 +1,5 @@
 {% extends 'financas/base.html' %}
+{% load l10n %}
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
@@ -33,7 +34,7 @@
                         </div>
                         <div class="progress" style="height: 8px;">
                             <div class="progress-bar {% if orc.estourado %}bg-danger{% else %}bg-success{% endif %}"
-                                 style="width: {{ orc.percentual_usado }}%"></div>
+                                 style="width: min({{ orc.percentual_usado|unlocalize }}%, 100%)"></div>
                         </div>
                     </li>
                 {% empty %}

@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Controle Financeiro{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'financas/css/theme.css' %}" rel="stylesheet">
 </head>
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'dashboard' %}">💰 Controle Financeiro</a>
+            <a class="navbar-brand" href="{% url 'dashboard' %}">✨ Controle Financeiro</a>
             <div class="navbar-nav">
                 <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
                 <a class="nav-link" href="{% url 'lancamento_lista' %}">Lançamentos</a>

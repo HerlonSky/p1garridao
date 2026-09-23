@@ -1,0 +1,177 @@
+/* Tema "mahou shoujo" suave: azul, rosa e roxo pastel, com brilho discreto. */
+
+:root {
+    --msq-blue: #8ecae6;
+    --msq-pink: #f6a6d8;
+    --msq-purple: #b799e0;
+    --msq-purple-dark: #7c5cbf;
+    --msq-bg-1: #eaf2ff;
+    --msq-bg-2: #f3ebff;
+    --msq-bg-3: #ffeef8;
+}
+
+body {
+    font-family: 'Quicksand', 'Segoe UI', sans-serif;
+    color: #3f3457;
+    background-color: var(--msq-bg-2);
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.55) 1px, transparent 1.6px),
+        linear-gradient(135deg, var(--msq-bg-1) 0%, var(--msq-bg-2) 50%, var(--msq-bg-3) 100%);
+    background-size: 90px 90px, 130px 130px, cover;
+    background-position: 0 0, 45px 65px, center;
+    background-attachment: fixed;
+    background-repeat: repeat, repeat, no-repeat;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--msq-purple-dark);
+    font-weight: 700;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, var(--msq-blue), var(--msq-purple), var(--msq-pink)) !important;
+    box-shadow: 0 2px 18px rgba(124, 92, 191, 0.35);
+}
+
+.navbar .navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #fff !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(150, 110, 200, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(90deg, rgba(142, 202, 230, 0.22), rgba(183, 153, 224, 0.2), rgba(246, 166, 216, 0.2));
+    border-bottom: 1px solid rgba(183, 153, 224, 0.25);
+    font-weight: 600;
+    color: var(--msq-purple-dark);
+    border-radius: 18px 18px 0 0 !important;
+}
+
+/* Tabelas */
+.table-wrap {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(150, 110, 200, 0.12);
+    overflow: hidden;
+}
+
+.table-wrap .table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    color: var(--msq-purple-dark);
+    border-bottom: 2px solid rgba(183, 153, 224, 0.3);
+    font-weight: 700;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(246, 166, 216, 0.07);
+}
+
+/* Botões */
+.btn-primary {
+    background: linear-gradient(135deg, var(--msq-blue), var(--msq-purple), var(--msq-pink));
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(199, 140, 214, 0.4);
+    color: #fff;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: linear-gradient(135deg, #5aa9d6, var(--msq-purple-dark), var(--msq-pink));
+    box-shadow: 0 6px 18px rgba(199, 140, 214, 0.55);
+    color: #fff;
+}
+
+.btn-outline-secondary {
+    border-radius: 999px;
+    border-color: rgba(124, 92, 191, 0.4);
+    color: var(--msq-purple-dark);
+}
+
+.btn-outline-secondary:hover {
+    background: rgba(183, 153, 224, 0.15);
+    border-color: var(--msq-purple);
+    color: var(--msq-purple-dark);
+}
+
+/* Badges e barras de progresso: mantêm o significado (verde=ok, rosa=estourado)
+   mas em tons do tema. */
+.badge.bg-success {
+    background: linear-gradient(90deg, #7bd8c0, #8ecae6) !important;
+}
+
+.badge.bg-danger {
+    background: linear-gradient(90deg, #f6a6d8, #ef6f9e) !important;
+}
+
+.badge.bg-warning {
+    background: linear-gradient(90deg, #ffd9a0, #f6a6d8) !important;
+    color: #5b3a52 !important;
+}
+
+.progress {
+    background-color: rgba(183, 153, 224, 0.15);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-bar.bg-success {
+    background: linear-gradient(90deg, #7bd8c0, #8ecae6) !important;
+}
+
+.progress-bar.bg-danger {
+    background: linear-gradient(90deg, #f6a6d8, #ef6f9e) !important;
+}
+
+/* Formulários */
+.form-control,
+.form-select {
+    border-radius: 12px;
+    border: 1px solid rgba(183, 153, 224, 0.4);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--msq-purple);
+    box-shadow: 0 0 0 0.2rem rgba(183, 153, 224, 0.25);
+}
+
+/* Alertas */
+.alert-success {
+    background: linear-gradient(90deg, rgba(123, 216, 192, 0.18), rgba(142, 202, 230, 0.18));
+    border: 1px solid rgba(123, 216, 192, 0.4);
+    color: #2f6f5e;
+    border-radius: 14px;
+}
+
+.text-danger {
+    color: #e0619b !important;
+}
+
+.text-success {
+    color: #3fa88a !important;
+}
