@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from .forms import LancamentoForm
 from .models import Categoria, Conta, Lancamento, Orcamento, Parcela
 
 
@@ -27,6 +28,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 @admin.register(Lancamento)
 class LancamentoAdmin(admin.ModelAdmin):
+    form = LancamentoForm  # reaproveita a validação do valor (> 0) também no Admin
     list_display = ('descricao', 'conta', 'categoria', 'tipo', 'valor', 'data', 'parcelado', 'numero_parcelas')
     list_filter = ('tipo', 'parcelado', 'categoria', 'conta')
     search_fields = ('descricao',)
