@@ -57,10 +57,13 @@ copy .env.example .env
 python manage.py makemigrations
 python manage.py migrate
 
-# 5. criar um usuário admin
+# 5. carregar os dados de exemplo (contas, categorias, lançamentos, parcelas e orçamento)
+python manage.py loaddata dados_exemplo
+
+# 6. criar um usuário admin
 python manage.py createsuperuser
 
-# 6. rodar o servidor
+# 7. rodar o servidor
 python manage.py runserver
 ```
 
@@ -68,6 +71,24 @@ Depois acesse:
 
 - **http://127.0.0.1:8000/** — telas do sistema (dashboard, lançamentos, orçamentos, parcelas)
 - **http://127.0.0.1:8000/admin/** — Django Admin (cadastro rápido de contas e categorias)
+
+## Dados de exemplo
+
+O arquivo `financas/fixtures/dados_exemplo.json` traz dados prontos para testar
+(o `db.sqlite3` não vai para o Git). Depois do `loaddata` o sistema já tem:
+
+- 2 contas (Nubank e Carteira), 4 categorias (Alimentação, Transporte, Lazer e Salário);
+- 6 lançamentos de 23/09/2026, incluindo um "Fone de ouvido" parcelado em 3x (parcelas em set, out e nov/2026);
+- 1 orçamento de Alimentação para 09/2026.
+
+Com eles dá para testar direto as features do P1:
+
+- **Busca e filtro** (tela Lançamentos): buscar `mercado` traz "Mercado Extra" e
+  "Uber para o mercado"; somando o filtro de categoria **Transporte**, sobra só o
+  "Uber para o mercado". Uma busca sem resultado (ex.: `pizza`) mostra a mensagem
+  de "nenhum lançamento encontrado".
+- **Validação do valor** (tela Novo lançamento): salvar com valor `0` ou `-50`
+  mostra o erro "O valor do lançamento deve ser maior que zero."
 
 ## Fluxo sugerido para testar
 

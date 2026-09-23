@@ -1,0 +1,242 @@
+[
+{
+  "model": "financas.conta",
+  "pk": 1,
+  "fields": {
+    "nome": "Nubank",
+    "tipo": "corrente",
+    "saldo_inicial": "1500.00",
+    "criada_em": "2026-09-23T22:29:21.924Z"
+  }
+},
+{
+  "model": "financas.conta",
+  "pk": 2,
+  "fields": {
+    "nome": "Carteira",
+    "tipo": "carteira",
+    "saldo_inicial": "100.00",
+    "criada_em": "2026-09-23T22:29:21.929Z"
+  }
+},
+{
+  "model": "financas.categoria",
+  "pk": 1,
+  "fields": {
+    "nome": "Alimentação",
+    "tipo": "despesa"
+  }
+},
+{
+  "model": "financas.categoria",
+  "pk": 2,
+  "fields": {
+    "nome": "Transporte",
+    "tipo": "despesa"
+  }
+},
+{
+  "model": "financas.categoria",
+  "pk": 3,
+  "fields": {
+    "nome": "Lazer",
+    "tipo": "despesa"
+  }
+},
+{
+  "model": "financas.categoria",
+  "pk": 4,
+  "fields": {
+    "nome": "Salário",
+    "tipo": "receita"
+  }
+},
+{
+  "model": "financas.lancamento",
+  "pk": 1,
+  "fields": {
+    "conta": 1,
+    "categoria": 4,
+    "descricao": "Salário do estágio",
+    "valor": "1800.00",
+    "tipo": "receita",
+    "data": "2026-09-23",
+    "parcelado": false,
+    "numero_parcelas": 1,
+    "criado_em": "2026-09-23T22:29:21.951Z"
+  }
+},
+{
+  "model": "financas.lancamento",
+  "pk": 2,
+  "fields": {
+    "conta": 1,
+    "categoria": 1,
+    "descricao": "Mercado Extra",
+    "valor": "320.50",
+    "tipo": "despesa",
+    "data": "2026-09-23",
+    "parcelado": false,
+    "numero_parcelas": 1,
+    "criado_em": "2026-09-23T22:29:21.960Z"
+  }
+},
+{
+  "model": "financas.lancamento",
+  "pk": 3,
+  "fields": {
+    "conta": 2,
+    "categoria": 1,
+    "descricao": "Lanche na facul",
+    "valor": "18.00",
+    "tipo": "despesa",
+    "data": "2026-09-23",
+    "parcelado": false,
+    "numero_parcelas": 1,
+    "criado_em": "2026-09-23T22:29:21.968Z"
+  }
+},
+{
+  "model": "financas.lancamento",
+  "pk": 4,
+  "fields": {
+    "conta": 1,
+    "categoria": 2,
+    "descricao": "Uber para o mercado",
+    "valor": "24.90",
+    "tipo": "despesa",
+    "data": "2026-09-23",
+    "parcelado": false,
+    "numero_parcelas": 1,
+    "criado_em": "2026-09-23T22:29:21.977Z"
+  }
+},
+{
+  "model": "financas.lancamento",
+  "pk": 5,
+  "fields": {
+    "conta": 1,
+    "categoria": 2,
+    "descricao": "Gasolina",
+    "valor": "150.00",
+    "tipo": "despesa",
+    "data": "2026-09-23",
+    "parcelado": false,
+    "numero_parcelas": 1,
+    "criado_em": "2026-09-23T22:29:21.985Z"
+  }
+},
+{
+  "model": "financas.lancamento",
+  "pk": 6,
+  "fields": {
+    "conta": 1,
+    "categoria": 3,
+    "descricao": "Fone de ouvido",
+    "valor": "240.00",
+    "tipo": "despesa",
+    "data": "2026-09-23",
+    "parcelado": true,
+    "numero_parcelas": 3,
+    "criado_em": "2026-09-23T22:29:21.993Z"
+  }
+},
+{
+  "model": "financas.parcela",
+  "pk": 1,
+  "fields": {
+    "lancamento": 1,
+    "numero": 1,
+    "valor": "1800.00",
+    "data_vencimento": "2026-09-23",
+    "paga": false
+  }
+},
+{
+  "model": "financas.parcela",
+  "pk": 2,
+  "fields": {
+    "lancamento": 2,
+    "numero": 1,
+    "valor": "320.50",
+    "data_vencimento": "2026-09-23",
+    "paga": false
+  }
+},
+{
+  "model": "financas.parcela",
+  "pk": 3,
+  "fields": {
+    "lancamento": 3,
+    "numero": 1,
+    "valor": "18.00",
+    "data_vencimento": "2026-09-23",
+    "paga": false
+  }
+},
+{
+  "model": "financas.parcela",
+  "pk": 4,
+  "fields": {
+    "lancamento": 4,
+    "numero": 1,
+    "valor": "24.90",
+    "data_vencimento": "2026-09-23",
+    "paga": false
+  }
+},
+{
+  "model": "financas.parcela",
+  "pk": 5,
+  "fields": {
+    "lancamento": 5,
+    "numero": 1,
+    "valor": "150.00",
+    "data_vencimento": "2026-09-23",
+    "paga": false
+  }
+},
+{
+  "model": "financas.parcela",
+  "pk": 6,
+  "fields": {
+    "lancamento": 6,
+    "numero": 1,
+    "valor": "80.00",
+    "data_vencimento": "2026-09-23",
+    "paga": false
+  }
+},
+{
+  "model": "financas.parcela",
+  "pk": 7,
+  "fields": {
+    "lancamento": 6,
+    "numero": 2,
+    "valor": "80.00",
+    "data_vencimento": "2026-10-23",
+    "paga": false
+  }
+},
+{
+  "model": "financas.parcela",
+  "pk": 8,
+  "fields": {
+    "lancamento": 6,
+    "numero": 3,
+    "valor": "80.00",
+    "data_vencimento": "2026-11-23",
+    "paga": false
+  }
+},
+{
+  "model": "financas.orcamento",
+  "pk": 1,
+  "fields": {
+    "categoria": 1,
+    "mes": 9,
+    "ano": 2026,
+    "valor_limite": "400.00"
+  }
+}
+]
