@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.contrib import messages
+from django.db.models import Sum
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import LancamentoForm, OrcamentoForm
@@ -12,15 +13,30 @@ def dashboard(request):
     contas = Conta.objects.all()
     orcamentos_do_mes = Orcamento.objects.filter(mes=hoje.month, ano=hoje.year).select_related('categoria')
     ultimos_lancamentos = Lancamento.objects.select_related('conta', 'categoria')[:10]
-    parcelas_em_aberto = Parcela.objects.filter(paga=False).select_related('lancamento').order_by('data_vencimento')[:10]
+    parcelas_em_aberto_qs = Parcela.objects.filter(paga=False).select_related('lancamento').order_by('data_vencimento')
+
+    saldo_total = sum((conta.saldo_atual for conta in contas), 0)
+
+    receitas_mes = Lancamento.objects.filter(
+        tipo='receita', data__year=hoje.year, data__month=hoje.month,
+    ).aggregate(total=Sum('valor'))['total'] or 0
+
+    despesas_mes = Parcela.objects.filter(
+        lancamento__tipo='despesa', data_vencimento__year=hoje.year, data_vencimento__month=hoje.month,
+    ).aggregate(total=Sum('valor'))['total'] or 0
 
     return render(request, 'financas/dashboard.html', {
         'contas': contas,
         'orcamentos_do_mes': orcamentos_do_mes,
         'ultimos_lancamentos': ultimos_lancamentos,
-        'parcelas_em_aberto': parcelas_em_aberto,
+        'parcelas_em_aberto': parcelas_em_aberto_qs[:10],
         'mes_atual': hoje.month,
         'ano_atual': hoje.year,
+        'saldo_total': saldo_total,
+        'receitas_mes': receitas_mes,
+        'despesas_mes': despesas_mes,
+        'total_parcelas_em_aberto': parcelas_em_aberto_qs.count(),
+        'orcamentos_estourados': sum(1 for o in orcamentos_do_mes if o.estourado),
     })
 
 

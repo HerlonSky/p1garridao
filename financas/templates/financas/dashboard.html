@@ -5,6 +5,40 @@
 {% block content %}
 <h1 class="mb-4">Dashboard</h1>
 
+<div class="row mb-4 g-3">
+    <div class="col-6 col-lg-3">
+        <div class="stat-tile">
+            <div class="stat-icon">💙</div>
+            <div class="stat-label">Saldo total</div>
+            <div class="stat-value">R$ {{ saldo_total }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-tile">
+            <div class="stat-icon">💜</div>
+            <div class="stat-label">Receitas de {{ mes_atual }}/{{ ano_atual }}</div>
+            <div class="stat-value">R$ {{ receitas_mes }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-tile">
+            <div class="stat-icon">🩷</div>
+            <div class="stat-label">Despesas de {{ mes_atual }}/{{ ano_atual }}</div>
+            <div class="stat-value">R$ {{ despesas_mes }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-tile">
+            <div class="stat-icon">💛</div>
+            <div class="stat-label">Parcelas em aberto</div>
+            <div class="stat-value">{{ total_parcelas_em_aberto }}</div>
+            {% if orcamentos_estourados %}
+                <div class="stat-hint text-danger">{{ orcamentos_estourados }} orçamento(s) estourado(s)</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
 <div class="row mb-4">
     <div class="col-md-6">
         <div class="card">
@@ -41,6 +75,9 @@
                     <li class="list-group-item text-muted">Nenhum orçamento definido para este mês.</li>
                 {% endfor %}
             </ul>
+            <div class="card-footer text-end">
+                <a href="{% url 'orcamento_lista' %}" class="small">Ver todos os orçamentos →</a>
+            </div>
         </div>
     </div>
 </div>
@@ -61,6 +98,9 @@
                     <li class="list-group-item text-muted">Nenhum lançamento ainda.</li>
                 {% endfor %}
             </ul>
+            <div class="card-footer text-end">
+                <a href="{% url 'lancamento_lista' %}" class="small">Ver todos os lançamentos →</a>
+            </div>
         </div>
     </div>
 
@@ -77,6 +117,9 @@
                     <li class="list-group-item text-muted">Nenhuma parcela em aberto.</li>
                 {% endfor %}
             </ul>
+            <div class="card-footer text-end">
+                <a href="{% url 'parcela_lista' %}" class="small">Ver todas as parcelas →</a>
+            </div>
         </div>
     </div>
 </div>

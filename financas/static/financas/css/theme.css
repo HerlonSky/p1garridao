@@ -66,6 +66,66 @@ h1, h2, h3, h4, h5 {
     border-radius: 18px 18px 0 0 !important;
 }
 
+.card-footer {
+    background: transparent;
+    border-top: 1px solid rgba(183, 153, 224, 0.2);
+    border-radius: 0 0 18px 18px !important;
+}
+
+.card-footer a {
+    color: var(--msq-purple-dark);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.card-footer a:hover {
+    color: #e0619b;
+}
+
+/* Tiles de resumo do dashboard */
+.stat-tile {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(150, 110, 200, 0.15);
+    padding: 1.1rem 1.2rem;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-tile::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--msq-blue), var(--msq-purple), var(--msq-pink));
+}
+
+.stat-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+
+.stat-label {
+    font-size: 0.82rem;
+    color: #7a6c96;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--msq-purple-dark);
+}
+
+.stat-hint {
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-top: 0.2rem;
+}
+
 /* Tabelas */
 .table-wrap {
     background: #fff;
