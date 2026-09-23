@@ -50,7 +50,7 @@
                     {{ l.get_tipo_display }}
                 </span>
             </td>
-            <td>R$ {{ l.valor }}</td>
+            <td>R$ {{ l.valor|floatformat:"2g" }}</td>
             <td>{% if l.parcelado %}{{ l.numero_parcelas }}x{% else %}à vista{% endif %}</td>
         </tr>
         {% empty %}

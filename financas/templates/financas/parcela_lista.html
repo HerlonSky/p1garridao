@@ -24,7 +24,7 @@
             <td>{{ p.lancamento.descricao }}</td>
             <td>{{ p.lancamento.categoria.nome }}</td>
             <td>{{ p.numero }}/{{ p.lancamento.numero_parcelas }}</td>
-            <td>R$ {{ p.valor }}</td>
+            <td>R$ {{ p.valor|floatformat:"2g" }}</td>
             <td>
                 <span class="badge {% if p.paga %}bg-success{% else %}bg-warning text-dark{% endif %}">
                     {% if p.paga %}Paga{% else %}Em aberto{% endif %}

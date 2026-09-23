@@ -10,21 +10,21 @@
         <div class="stat-tile">
             <div class="stat-icon">💙</div>
             <div class="stat-label">Saldo total</div>
-            <div class="stat-value">R$ {{ saldo_total }}</div>
+            <div class="stat-value">R$ {{ saldo_total|floatformat:"2g" }}</div>
         </div>
     </div>
     <div class="col-6 col-lg-3">
         <div class="stat-tile">
             <div class="stat-icon">💜</div>
             <div class="stat-label">Receitas de {{ mes_atual }}/{{ ano_atual }}</div>
-            <div class="stat-value">R$ {{ receitas_mes }}</div>
+            <div class="stat-value">R$ {{ receitas_mes|floatformat:"2g" }}</div>
         </div>
     </div>
     <div class="col-6 col-lg-3">
         <div class="stat-tile">
             <div class="stat-icon">🩷</div>
             <div class="stat-label">Despesas de {{ mes_atual }}/{{ ano_atual }}</div>
-            <div class="stat-value">R$ {{ despesas_mes }}</div>
+            <div class="stat-value">R$ {{ despesas_mes|floatformat:"2g" }}</div>
         </div>
     </div>
     <div class="col-6 col-lg-3">
@@ -47,7 +47,7 @@
                 {% for conta in contas %}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>{{ conta.nome }} <small class="text-muted">({{ conta.get_tipo_display }})</small></span>
-                        <strong>R$ {{ conta.saldo_atual }}</strong>
+                        <strong>R$ {{ conta.saldo_atual|floatformat:"2g" }}</strong>
                     </li>
                 {% empty %}
                     <li class="list-group-item text-muted">Nenhuma conta cadastrada. Cadastre pelo Admin.</li>
@@ -64,7 +64,7 @@
                     <li class="list-group-item">
                         <div class="d-flex justify-content-between">
                             <span>{{ orc.categoria.nome }}</span>
-                            <span>R$ {{ orc.valor_gasto }} / R$ {{ orc.valor_limite }}</span>
+                            <span>R$ {{ orc.valor_gasto|floatformat:"2g" }} / R$ {{ orc.valor_limite|floatformat:"2g" }}</span>
                         </div>
                         <div class="progress" style="height: 8px;">
                             <div class="progress-bar {% if orc.estourado %}bg-danger{% else %}bg-success{% endif %}"
@@ -91,7 +91,7 @@
                     <li class="list-group-item d-flex justify-content-between">
                         <span>{{ l.data|date:"d/m/Y" }} - {{ l.descricao }}</span>
                         <span class="{% if l.tipo == 'despesa' %}text-danger{% else %}text-success{% endif %}">
-                            R$ {{ l.valor }}
+                            R$ {{ l.valor|floatformat:"2g" }}
                         </span>
                     </li>
                 {% empty %}
@@ -111,7 +111,7 @@
                 {% for p in parcelas_em_aberto %}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>{{ p.data_vencimento|date:"d/m/Y" }} - {{ p.lancamento.descricao }} ({{ p.numero }}/{{ p.lancamento.numero_parcelas }})</span>
-                        <strong>R$ {{ p.valor }}</strong>
+                        <strong>R$ {{ p.valor|floatformat:"2g" }}</strong>
                     </li>
                 {% empty %}
                     <li class="list-group-item text-muted">Nenhuma parcela em aberto.</li>

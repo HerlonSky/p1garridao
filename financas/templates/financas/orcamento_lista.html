@@ -24,8 +24,8 @@
         <tr>
             <td>{{ orc.categoria.nome }}</td>
             <td>{{ orc.mes }}/{{ orc.ano }}</td>
-            <td>R$ {{ orc.valor_limite }}</td>
-            <td>R$ {{ orc.valor_gasto }}</td>
+            <td>R$ {{ orc.valor_limite|floatformat:"2g" }}</td>
+            <td>R$ {{ orc.valor_gasto|floatformat:"2g" }}</td>
             <td style="min-width: 160px;">
                 <div class="progress" style="height: 8px;">
                     <div class="progress-bar {% if orc.estourado %}bg-danger{% else %}bg-success{% endif %}"
