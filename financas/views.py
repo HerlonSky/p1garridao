@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.contrib import messages
-from django.db.models import Sum
+from django.db.models import Q, Sum
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import LancamentoForm, OrcamentoForm
@@ -47,10 +47,15 @@ def lancamento_lista(request):
     q = request.GET.get('q', '').strip()
     categoria_id = request.GET.get('categoria', '')
 
+    # Desafio extra: as duas condições são combinadas num único objeto Q() e aplicadas
+    # numa só chamada de .filter(). Q() vazio não filtra nada; "&=" junta as condições
+    # com AND, então com os dois preenchidos o SQL fica: WHERE descricao LIKE ... AND categoria_id = ...
+    filtros = Q()
     if q:
-        lancamentos = lancamentos.filter(descricao__icontains=q)
+        filtros &= Q(descricao__icontains=q)
     if categoria_id.isdigit():
-        lancamentos = lancamentos.filter(categoria_id=categoria_id)
+        filtros &= Q(categoria_id=categoria_id)
+    lancamentos = lancamentos.filter(filtros)
 
     return render(request, 'financas/lancamento_lista.html', {
         'lancamentos': lancamentos,
